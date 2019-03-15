@@ -22,12 +22,6 @@ class Cli(BaseCli):
         'branches': ['develop'],
         'python': 3
     }
-    default_mail_config = {
-        'host': 'mail.restr.im',
-        'port': 587,
-        'user': 'minuhin@restream.rt.ru',
-        'password': '3wmWyTHD'
-    }
     py3 = {
         'pip': 'pip3',
         'python': 'python3'
@@ -40,8 +34,6 @@ class Cli(BaseCli):
     def _get_config(self, config: dict):
         result = self.defaults
         result.update(config)
-        if result['mail_config'] == 'default':
-            result['mail_config'] = self.default_mail_config
         return result
 
     def _gen_job(self, config):
