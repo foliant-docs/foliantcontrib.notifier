@@ -18,6 +18,7 @@ class Cli(BaseCli):
         'config': 'notifier_config.yml',
         'stage': 'notify',
         'job': 'notifier',
+        'image': 'python:latest',
         'mail_config': 'default',
         'branches': ['develop'],
         'python': 3
@@ -45,7 +46,10 @@ class Cli(BaseCli):
                              f'{python["pip"]} install -r ./gitlab_notifier/requirements.txt',
                              f'{python["python"]} ./gitlab_notifier/gitlab_notifier.py -c {config["config"]}'],
                   'only': config['branches'],
-                  'tags': ['lowcapacity']}
+                  'tags': ['lowcapacity'],
+                  'variables': {'GIT_STRATEGY': 'fetch'}}
+        if config['image']:
+            result['image'] = config['image']
         return result
 
     def _gen_ci_config(self, config):
