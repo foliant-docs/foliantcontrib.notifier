@@ -14,12 +14,12 @@ from foliant.config import Parser
 class Cli(BaseCli):
     config_section = 'notifier'
     defaults = {
-        'repo_url': 'http://git.itv.restr.im/docs-itv/gitlab_notifier.git',
+        'repo_url': 'https://gitlab.com/ddddsa/gitlab_notifier.git',
         'config': 'notifier_config.yml',
         'stage': 'notify',
         'job': 'notifier',
         'image': 'python:latest',
-        'mail_config': 'default',
+        # 'mail_config': 'default',
         'branches': ['develop'],
         'python': 3
     }
@@ -69,8 +69,10 @@ class Cli(BaseCli):
         return result
 
     def _gen_notifier_config(self, config: dict):
-        return dict(mail_config=config['mail_config'],
-                    projects=config.get('projects', {}))
+        result = dict(projects=config.get('projects', {}))
+        if 'mail_config' in config:
+            result['mail_config'] = config['mail_config']
+        return result
 
     def _setup_ci_config(self, config: dict, ci_config: PosixPath):
         conf = self._get_config(config)
