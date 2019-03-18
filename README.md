@@ -8,6 +8,22 @@ CLI extension for Foliant to set up [GitLab notifier](https://gitlab.com/ddddsa/
 $ pip install foliantcontrib.notifier
 ```
 
+## Usage
+
+> Note that to use this command you will have to specify valid [config](#config) first!
+
+Apply notifications for this repo:
+
+```bash
+$ foliant notifier setup
+```
+
+Disable notifications in this repo:
+
+```bash
+$ foliant notifier disable
+```
+
 ## Config
 
 Before running notifier command you will have to supply valid config. Set it up under the `notifier` section in your `foliant.yml`.
